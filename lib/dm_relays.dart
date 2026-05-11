@@ -7,7 +7,8 @@ import 'package:ndk/ndk.dart';
 /// event is found.
 Future<List<String>> fetchDmRelays(Ndk ndk, String pubkey) async {
   final userRelayList = await ndk.userRelayLists.getSingleUserRelayList(pubkey);
-  final writeRelays = userRelayList?.relays.entries
+  final writeRelays =
+      userRelayList?.relays.entries
           .where((e) => e.value.isWrite)
           .map((e) => e.key)
           .toList() ??
