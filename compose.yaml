@@ -1,0 +1,7 @@
+services:
+  nostr-to-webhook:
+    image: ghcr.io/nogringo/nostr-to-webhook:latest
+    # build: .   # uncomment to build locally instead of pulling
+    container_name: nostr-to-webhook
+    restart: unless-stopped
+    env_file: .env
