@@ -29,7 +29,13 @@ void main(List<String> arguments) async {
   _log.info('WEBHOOK_URL: $webhookUrl');
 
   final ndk = Ndk(
-    NdkConfig(eventVerifier: Bip340EventVerifier(), cache: MemCacheManager()),
+    NdkConfig(
+      eventVerifier: Bip340EventVerifier(),
+      cache: MemCacheManager(),
+      // Some DM relays (e.g. auth.nostr1.com) close the subscription on
+      // auth-required before NDK can auth lazily. Auth upfront.
+      eagerAuth: true,
+    ),
   );
 
   final privkey = Nip19.decode(nsec);
